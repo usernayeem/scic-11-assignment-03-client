@@ -9,7 +9,7 @@ export const Navbar = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const profileDropdownRef = useRef(null);
   const toast = useToast();
-  const { Logout } = useContext(AuthContext);
+  const { user, Logout } = useContext(AuthContext);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -88,59 +88,70 @@ export const Navbar = () => {
       </div>
 
       <div className="navbar-end flex items-center">
-        {/* User profile with dropdown*/}
-        <div className="relative mr-4" ref={profileDropdownRef}>
-          <div className="group tooltip-trigger relative">
-            <div
-              className="avatar cursor-pointer"
-              onClick={toggleProfileDropdown}
-            >
-              <div className="w-10 rounded-full ring ring-blue-500 ring-offset-base-100 ring-offset-2">
-                <img
-                  className="rounded-full"
-                  src="https://i.ibb.co/MDfpbH6T/profile.webp"
-                  alt="Profile"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Dropdown menu */}
-          {isProfileOpen && (
-            <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5 transition-colors duration-200 bg-white dark:bg-gray-700">
-              <div className="px-4 py-2 text-sm border-b text-gray-700 border-gray-200 dark:text-gray-200 dark:border-gray-600">
-                <p className="font-semibold">Jhon Doe</p>
-                <p className="text-xs">jhondoe@example.com</p>
-              </div>
-
-              <button
-                onClick={handleLogout}
-                className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600"
+        {/* Conditional rendering based on user authentication */}
+        {user ? (
+          /* User profile with dropdown when logged in */
+          <div className="relative mr-4" ref={profileDropdownRef}>
+            <div className="group tooltip-trigger relative">
+              <div
+                className="avatar cursor-pointer"
+                onClick={toggleProfileDropdown}
               >
-                Logout
-              </button>
+                <div className="w-10 rounded-full ring ring-blue-500 ring-offset-base-100 ring-offset-2 dark:ring-offset-gray-800">
+                  <img
+                    className="rounded-full object-cover"
+                    src={
+                      user.photoURL || "https://i.ibb.co/MDfpbH6T/profile.webp"
+                    }
+                    alt="Profile"
+                    onError={(e) => {
+                      e.target.src = "https://i.ibb.co/MDfpbH6T/profile.webp";
+                    }}
+                  />
+                </div>
+              </div>
             </div>
-          )}
-        </div>
 
-        <ul className="hidden lg:flex gap-2 mr-4">
-          <li>
-            <Link
-              to="/login"
-              className="btn btn-outline btn-primary text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white"
-            >
-              Login
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/register"
-              className="btn btn-primary bg-blue-600 hover:bg-blue-700 border-blue-600 text-white"
-            >
-              Register
-            </Link>
-          </li>
-        </ul>
+            {/* Dropdown menu */}
+            {isProfileOpen && (
+              <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5 transition-colors duration-200 bg-white dark:bg-gray-700">
+                <div className="px-4 py-2 text-sm border-b text-gray-700 border-gray-200 dark:text-gray-200 dark:border-gray-600">
+                  <p className="font-semibold">{user.displayName || "User"}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    {user.email}
+                  </p>
+                </div>
+
+                <button
+                  onClick={handleLogout}
+                  className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          /* Login/Register buttons when not logged in */
+          <ul className="hidden lg:flex gap-2 mr-4">
+            <li>
+              <Link
+                to="/login"
+                className="btn btn-outline btn-primary text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white transition-colors duration-200"
+              >
+                Login
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/register"
+                className="btn btn-primary bg-blue-600 hover:bg-blue-700 border-blue-600 text-white transition-colors duration-200"
+              >
+                Register
+              </Link>
+            </li>
+          </ul>
+        )}
 
         {/* Mobile menu */}
         <div className="dropdown dropdown-end lg:hidden">
@@ -159,14 +170,54 @@ export const Navbar = () => {
             <li>
               <NavLink to="/my-bookings">My Bookings</NavLink>
             </li>
-            <>
-              <li className="border-t mt-2 pt-2 border-gray-200 dark:border-gray-600">
-                <NavLink to="/login">Login</NavLink>
-              </li>
-              <li>
-                <NavLink to="/register">Register</NavLink>
-              </li>
-            </>
+
+            {/* Conditional mobile menu items */}
+            {user ? (
+              /* User info and logout for mobile when logged in */
+              <div className="border-t mt-2 pt-2 border-gray-200 dark:border-gray-600">
+                <li className="px-2 py-1">
+                  <div className="flex items-center gap-3">
+                    <img
+                      className="w-8 h-8 rounded-full object-cover"
+                      src={
+                        user.photoURL ||
+                        "https://i.ibb.co/MDfpbH6T/profile.webp"
+                      }
+                      alt="Profile"
+                      onError={(e) => {
+                        e.target.src = "https://i.ibb.co/MDfpbH6T/profile.webp";
+                      }}
+                    />
+                    <div>
+                      <p className="font-semibold text-sm">
+                        {user.displayName || "User"}
+                      </p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                        {user.email}
+                      </p>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </div>
+            ) : (
+              /* Login/Register for mobile when not logged in */
+              <div className="border-t mt-2 pt-2 border-gray-200 dark:border-gray-600">
+                <li>
+                  <NavLink to="/login">Login</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/register">Register</NavLink>
+                </li>
+              </div>
+            )}
           </ul>
         </div>
       </div>
