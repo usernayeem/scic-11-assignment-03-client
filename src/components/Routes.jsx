@@ -7,6 +7,8 @@ import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
 import { ForgetPass } from "../pages/ForgetPass";
 import { NotFound } from "../pages/NotFound";
+import { Contact } from "./Contact";
+import { Rooms } from "../pages/Rooms";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +30,14 @@ export const router = createBrowserRouter([
       {
         path: "/forget-password",
         element: <ForgetPass />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/rooms",
+        element: <Rooms />,
       },
       {
         path: "*",
