@@ -9,6 +9,8 @@ import { ForgetPass } from "../pages/ForgetPass";
 import { NotFound } from "../pages/NotFound";
 import { Contact } from "./Contact";
 import { Rooms } from "../pages/Rooms";
+import { RoomDetails } from "../pages/RoomDetails";
+import { MyBookings } from "../pages/MyBookings";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +40,14 @@ export const router = createBrowserRouter([
       {
         path: "/rooms",
         element: <Rooms />,
+      },
+      {
+        path: "/room-details/:id",
+        element: <RoomDetails />,
+      },
+      {
+        path: "/my-bookings",
+        element: <MyBookings />,
       },
       {
         path: "*",
