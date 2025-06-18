@@ -35,6 +35,22 @@ export const RoomDetails = () => {
   const [guests, setGuests] = useState(1);
   const [bookingLoading, setBookingLoading] = useState(false);
 
+  // Get the current price (discount price if available, otherwise regular price)
+  const getCurrentPrice = () => {
+    if (room?.discountPrice && room.discountPrice < room.price) {
+      return room.discountPrice;
+    }
+    return room?.price || 0;
+  };
+
+  // Calculate total price including additional guest fees
+  const getTotalPrice = () => {
+    const basePrice = getCurrentPrice();
+    const additionalGuests = Math.max(0, guests - 1); // First guest is free
+    const additionalGuestFee = basePrice * 0.25 * additionalGuests; // 25% per additional guest
+    return basePrice + additionalGuestFee;
+  };
+
   // Fetch room details
   useEffect(() => {
     const fetchRoomDetails = async () => {
@@ -114,10 +130,11 @@ export const RoomDetails = () => {
     try {
       setBookingLoading(true);
 
+      const totalPrice = getTotalPrice();
       const bookingData = {
         roomId: room._id,
         roomName: room.name,
-        price: room.price,
+        price: totalPrice,
         bookingDate,
         guests,
         userEmail: user.email,
@@ -209,13 +226,13 @@ export const RoomDetails = () => {
               <img
                 src={
                   room.image ||
-                  "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                  "https://i.ibb.co/GQzR5BLS/image-not-found.webp"
                 }
                 alt={room.name}
                 className="w-full h-64 md:h-80 object-cover rounded-lg shadow-lg"
                 onError={(e) => {
                   e.target.src =
-                    "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
+                    "https://i.ibb.co/GQzR5BLS/image-not-found.webp";
                 }}
               />
             </div>
@@ -285,7 +302,7 @@ export const RoomDetails = () => {
                     Per Day
                   </p>
                   <p className="font-semibold text-gray-800 dark:text-white">
-                    ${room.price}
+                    ${getCurrentPrice()}
                   </p>
                 </div>
               </div>
@@ -389,13 +406,32 @@ export const RoomDetails = () => {
           {/* Booking Sidebar */}
           <div className="lg:col-span-1">
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700 sticky top-8">
+              {/* Clean Pricing Display - Inspired by RoomCard */}
               <div className="text-center mb-6">
-                <span className="text-3xl font-bold text-blue-600">
-                  ${room.price}
-                </span>
-                <span className="text-gray-600 dark:text-gray-400 ml-1">
-                  /day
-                </span>
+                {room.discountPrice && room.discountPrice < room.price ? (
+                  <div>
+                    <div className="flex items-baseline justify-center gap-2 mb-1">
+                      <span className="text-3xl font-bold text-blue-600">
+                        ${room.discountPrice}
+                      </span>
+                      <span className="text-lg text-gray-500 dark:text-gray-400 line-through">
+                        ${room.price}
+                      </span>
+                    </div>
+                    <span className="text-gray-600 dark:text-gray-400 text-sm">
+                      per night
+                    </span>
+                  </div>
+                ) : (
+                  <div>
+                    <span className="text-3xl font-bold text-blue-600">
+                      ${room.price}
+                    </span>
+                    <span className="text-gray-600 dark:text-gray-400 text-sm ml-1">
+                      /night
+                    </span>
+                  </div>
+                )}
               </div>
 
               <div className="space-y-4 mb-6">
@@ -433,19 +469,23 @@ export const RoomDetails = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Guests
+                    Guests (Max 3)
                   </label>
                   <select
                     value={guests}
                     onChange={(e) => setGuests(parseInt(e.target.value))}
                     className="select select-bordered w-full text-base bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white"
                   >
-                    {Array.from({ length: room.capacity || 2 }, (_, i) => (
+                    {Array.from({ length: 3 }, (_, i) => (
                       <option key={i + 1} value={i + 1}>
                         {i + 1} Guest{i + 1 > 1 ? "s" : ""}
+                        {i === 0 ? "" : ` (+$${Math.round(getCurrentPrice() * 0.25 * i)})`}
                       </option>
                     ))}
                   </select>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    First guest is free. Additional guests: +25% each
+                  </p>
                 </div>
               </div>
 
@@ -453,12 +493,22 @@ export const RoomDetails = () => {
                 <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-4">
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-gray-600 dark:text-gray-400">
-                      ${room.price} × 1 day
+                      Room price
                     </span>
                     <span className="font-semibold text-gray-800 dark:text-white">
-                      ${room.price}
+                      ${getCurrentPrice()}
                     </span>
                   </div>
+                  {guests > 1 && (
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-gray-600 dark:text-gray-400">
+                        Additional guests ({guests - 1})
+                      </span>
+                      <span className="font-semibold text-gray-800 dark:text-white">
+                        +${Math.round(getCurrentPrice() * 0.25 * (guests - 1))}
+                      </span>
+                    </div>
+                  )}
                   <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">
                     {new Date(bookingDate).toLocaleDateString()} • {guests}{" "}
                     guest{guests > 1 ? "s" : ""}
@@ -469,7 +519,7 @@ export const RoomDetails = () => {
                         Total
                       </span>
                       <span className="font-bold text-blue-600 text-lg">
-                        ${room.price}
+                        ${Math.round(getTotalPrice())}
                       </span>
                     </div>
                   </div>
@@ -529,16 +579,36 @@ export const RoomDetails = () => {
                 </div>
 
                 <div className="border-t border-gray-300 dark:border-gray-600 pt-4">
-                  <div className="flex justify-between items-center">
+                  <div className="space-y-2 mb-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                        Room price
+                      </span>
+                      <span className="text-gray-800 dark:text-white">
+                        ${getCurrentPrice()}
+                      </span>
+                    </div>
+                    {guests > 1 && (
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600 dark:text-gray-400">
+                          Additional guests ({guests - 1})
+                        </span>
+                        <span className="text-gray-800 dark:text-white">
+                          +${Math.round(getCurrentPrice() * 0.25 * (guests - 1))}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex justify-between items-center border-t border-gray-300 dark:border-gray-600 pt-2">
                     <span className="font-semibold text-gray-800 dark:text-white">
                       Total Amount
                     </span>
                     <span className="font-bold text-blue-600 text-xl">
-                      ${room.price}
+                      ${Math.round(getTotalPrice())}
                     </span>
                   </div>
                   <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                    For 1 day • {new Date(bookingDate).toLocaleDateString()}
+                    For {new Date(bookingDate).toLocaleDateString()}
                   </p>
                 </div>
               </div>

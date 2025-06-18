@@ -97,7 +97,6 @@ export const MyBookings = () => {
                 userReview: userReview || null,
               };
             } catch (error) {
-              console.error("Error fetching room details:", error);
               return { ...booking, hasReviewed: false, userReview: null };
             }
           })
@@ -433,12 +432,12 @@ export const MyBookings = () => {
                                     <img
                                       src={
                                         booking.roomImage ||
-                                        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                                        "https://i.ibb.co/GQzR5BLS/image-not-found.webp"
                                       }
                                       alt={booking.roomName}
                                       onError={(e) => {
                                         e.target.src =
-                                          "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80";
+                                          "https://i.ibb.co/GQzR5BLS/image-not-found.webp";
                                       }}
                                     />
                                   </div>
@@ -496,7 +495,7 @@ export const MyBookings = () => {
                             </td>
                             <td>
                               <div className="font-bold text-blue-600">
-                                ${booking.price}
+                                ${Math.round(booking.price)}
                               </div>
                               <div className="text-xs text-gray-500 dark:text-gray-400">
                                 per night
@@ -585,13 +584,13 @@ export const MyBookings = () => {
                         <img
                           src={
                             booking.roomImage ||
-                            "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                            "https://i.ibb.co/GQzR5BLS/image-not-found.webp"
                           }
                           alt={booking.roomName}
                           className="w-16 h-16 rounded-lg object-cover"
                           onError={(e) => {
                             e.target.src =
-                              "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80";
+                              "https://i.ibb.co/GQzR5BLS/image-not-found.webp";
                           }}
                         />
                         <div className="flex-1">
@@ -617,7 +616,7 @@ export const MyBookings = () => {
                         </div>
                         <div className="text-right">
                           <div className="font-bold text-blue-600">
-                            ${booking.price}
+                            ${Math.round(booking.price)}
                           </div>
                           <div className="text-xs text-gray-500 dark:text-gray-400">
                             per night
