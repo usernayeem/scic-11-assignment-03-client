@@ -5,6 +5,7 @@ import { useToast } from "../contexts/ToastContext";
 import { LuHotel } from "react-icons/lu";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { updateProfile } from "firebase/auth";
+import { Helmet } from "react-helmet";
 
 export const Register = () => {
   const { registerUser, googleAuth } = useContext(AuthContext);
@@ -82,6 +83,25 @@ export const Register = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12 transition-colors duration-200 bg-gradient-to-br from-blue-50 to-white dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-900">
+      <Helmet>
+        <title>Register - Hotel Nest</title>
+        <meta
+          name="description"
+          content="Create an account at Hotel Nest to enjoy exclusive offers and manage your bookings easily."
+        />
+        <meta
+          name="keywords"
+          content="Register, Hotel Nest, User Account, Sign Up, Hotel Reservations"
+        />
+        <meta name="author" content="Hotel Nest Team" />
+        <meta property="og:title" content="Register - Hotel Nest" />
+        <meta
+          property="og:description"
+          content="Join Hotel Nest to start your amazing journey and manage your hotel stays."
+        />
+        <meta property="og:image" content="URL_to_image" />
+        <meta property="og:url" content="https://www.hotel-nest.com/register" />
+      </Helmet>
       <div className="max-w-md w-full space-y-8">
         {/* Header */}
         <div className="text-center">

@@ -20,6 +20,7 @@ import {
   FaEye,
   FaClock,
 } from "react-icons/fa";
+import { Helmet } from "react-helmet";
 
 export const MyBookings = () => {
   const { user } = useContext(AuthContext);
@@ -371,6 +372,28 @@ export const MyBookings = () => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
+      <Helmet>
+        <title>My Bookings - Hotel Nest</title>
+        <meta
+          name="description"
+          content="View and manage your hotel bookings, including cancellation and review options for your stays at Hotel Nest."
+        />
+        <meta
+          name="keywords"
+          content="My Bookings, Hotel Nest, Manage Bookings, Hotel Reservations, User Account"
+        />
+        <meta name="author" content="Hotel Nest Team" />
+        <meta property="og:title" content="My Bookings - Hotel Nest" />
+        <meta
+          property="og:description"
+          content="Manage your bookings, update dates, cancel reservations, and share your experiences."
+        />
+        <meta property="og:image" content="URL_to_image" />
+        <meta
+          property="og:url"
+          content="https://www.hotel-nest.com/my-bookings"
+        />
+      </Helmet>
       <div className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="text-center mb-8">

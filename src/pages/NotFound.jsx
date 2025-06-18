@@ -2,10 +2,30 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { LuHotel } from "react-icons/lu";
 import { IoHomeOutline, IoSearchOutline, IoCallOutline } from "react-icons/io5";
+import { Helmet } from "react-helmet";
 
 export const NotFound = () => {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 transition-colors duration-200 bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+      <Helmet>
+        <title>404 - Page Not Found</title>
+        <meta
+          name="description"
+          content="Oops! The page you're looking for does not exist. Return to the homepage or browse our available rooms."
+        />
+        <meta
+          name="keywords"
+          content="404, Not Found, Hotel Nest, Page Not Found, Error"
+        />
+        <meta name="author" content="Hotel Nest Team" />
+        <meta property="og:title" content="404 - Page Not Found" />
+        <meta
+          property="og:description"
+          content="It seems the page you're looking for has checked out. Explore our amazing accommodations!"
+        />
+        <meta property="og:image" content="URL_to_image" />
+        <meta property="og:url" content="https://www.hotel-nest.com/404" />
+      </Helmet>
       <div className="max-w-4xl mx-auto text-center">
         {/* 404 Illustration */}
         <div className="mb-8">

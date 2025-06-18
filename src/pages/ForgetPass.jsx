@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { useToast } from "../contexts/ToastContext";
 import { LuHotel } from "react-icons/lu";
+import { Helmet } from "react-helmet";
 
 export const ForgetPass = () => {
   const toast = useToast();
@@ -53,6 +54,28 @@ export const ForgetPass = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12 transition-colors duration-200 bg-gradient-to-br from-blue-50 to-white dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-900">
+      <Helmet>
+        <title>Password Reset - Hotel Nest</title>
+        <meta
+          name="description"
+          content="Reset your password by entering your email address. We'll send you a link to create a new password."
+        />
+        <meta
+          name="keywords"
+          content="Password Reset, Forgot Password, User Account, Hotel Nest"
+        />
+        <meta name="author" content="Hotel Nest Team" />
+        <meta property="og:title" content="Password Reset - Hotel Nest" />
+        <meta
+          property="og:description"
+          content="Forgot your password? Enter your email to receive a reset link."
+        />
+        <meta property="og:image" content="URL_to_image" />
+        <meta
+          property="og:url"
+          content="https://www.hotel-nest.com/forget-password"
+        />
+      </Helmet>
       <div className="max-w-md w-full space-y-8">
         {/* Header */}
         <div className="text-center">

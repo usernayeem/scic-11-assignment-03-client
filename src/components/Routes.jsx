@@ -7,10 +7,10 @@ import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
 import { ForgetPass } from "../pages/ForgetPass";
 import { NotFound } from "../pages/NotFound";
-import { Contact } from "./Contact";
 import { Rooms } from "../pages/Rooms";
 import { RoomDetails } from "../pages/RoomDetails";
 import { MyBookings } from "../pages/MyBookings";
+import { Contact } from "../pages/Contact";
 
 export const router = createBrowserRouter([
   {

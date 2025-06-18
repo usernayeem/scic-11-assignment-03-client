@@ -4,6 +4,7 @@ import { useToast } from "../contexts/ToastContext";
 import axios from "axios";
 import { FaBed, FaFilter } from "react-icons/fa";
 import { RoomCard } from "../components/RoomCard";
+import { Helmet } from "react-helmet";
 
 export const Rooms = () => {
   const [rooms, setRooms] = useState([]);
@@ -71,6 +72,25 @@ export const Rooms = () => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
+      <Helmet>
+        <title>Rooms - Hotel Nest</title>
+        <meta
+          name="description"
+          content="Explore our range of comfortable and luxurious rooms at Hotel Nest. Find the perfect stay for your next getaway."
+        />
+        <meta
+          name="keywords"
+          content="Hotel Rooms, Luxury Accommodation, Room Booking, Travel, Hotel Nest"
+        />
+        <meta name="author" content="Hotel Nest Team" />
+        <meta property="og:title" content="Hotel Nest Rooms" />
+        <meta
+          property="og:description"
+          content="Discover our collection of rooms designed for your comfort and relaxation."
+        />
+        <meta property="og:image" content="URL_to_image" />
+        <meta property="og:url" content="https://www.hotel-nest.com/rooms" />
+      </Helmet>
       <div className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="text-center mb-8">

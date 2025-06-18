@@ -84,6 +84,18 @@ export const Navbar = () => {
               My Bookings
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                isActive
+                  ? "bg-blue-100 text-blue-600 rounded-lg dark:bg-blue-900 dark:text-white"
+                  : "hover:bg-blue-50 hover:text-blue-600 rounded-lg dark:hover:bg-blue-900 dark:hover:white"
+              }
+            >
+              Contact
+            </NavLink>
+          </li>
         </ul>
       </div>
 
@@ -169,6 +181,9 @@ export const Navbar = () => {
             </li>
             <li>
               <NavLink to="/my-bookings">My Bookings</NavLink>
+            </li>
+            <li>
+              <NavLink to="/contact">Contact</NavLink>
             </li>
 
             {/* Conditional mobile menu items */}

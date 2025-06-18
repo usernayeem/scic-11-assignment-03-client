@@ -21,6 +21,7 @@ import {
 } from "react-icons/fa";
 import { MdAcUnit } from "react-icons/md";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 
 export const RoomDetails = () => {
   const { id } = useParams();
@@ -208,6 +209,28 @@ export const RoomDetails = () => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
+      <Helmet>
+        <title>Room Details - Hotel Nest</title>
+        <meta
+          name="description"
+          content="View detailed information about the room at Hotel Nest, including amenities, pricing, and guest reviews."
+        />
+        <meta
+          name="keywords"
+          content="Room Details, Hotel Nest, Accommodation, Room Booking, Travel"
+        />
+        <meta name="author" content="Hotel Nest Team" />
+        <meta property="og:title" content="Room Details - Hotel Nest" />
+        <meta
+          property="og:description"
+          content="Discover all the features of your selected room, including pricing and availability."
+        />
+        <meta property="og:image" content="URL_to_image" />
+        <meta
+          property="og:url"
+          content={`https://www.hotel-nest.com/rooms/${id}`}
+        />
+      </Helmet>
       <div className="container mx-auto px-4 py-8">
         {/* Back Button */}
         <button
@@ -225,8 +248,7 @@ export const RoomDetails = () => {
             <div className="mb-8">
               <img
                 src={
-                  room.image ||
-                  "https://i.ibb.co/GQzR5BLS/image-not-found.webp"
+                  room.image || "https://i.ibb.co/GQzR5BLS/image-not-found.webp"
                 }
                 alt={room.name}
                 className="w-full h-64 md:h-80 object-cover rounded-lg shadow-lg"
@@ -479,7 +501,9 @@ export const RoomDetails = () => {
                     {Array.from({ length: 3 }, (_, i) => (
                       <option key={i + 1} value={i + 1}>
                         {i + 1} Guest{i + 1 > 1 ? "s" : ""}
-                        {i === 0 ? "" : ` (+$${Math.round(getCurrentPrice() * 0.25 * i)})`}
+                        {i === 0
+                          ? ""
+                          : ` (+$${Math.round(getCurrentPrice() * 0.25 * i)})`}
                       </option>
                     ))}
                   </select>
@@ -594,7 +618,8 @@ export const RoomDetails = () => {
                           Additional guests ({guests - 1})
                         </span>
                         <span className="text-gray-800 dark:text-white">
-                          +${Math.round(getCurrentPrice() * 0.25 * (guests - 1))}
+                          +$
+                          {Math.round(getCurrentPrice() * 0.25 * (guests - 1))}
                         </span>
                       </div>
                     )}

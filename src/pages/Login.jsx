@@ -4,6 +4,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { useToast } from "../contexts/ToastContext";
 import { LuHotel } from "react-icons/lu";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+import { Helmet } from "react-helmet";
 
 export const Login = () => {
   const { Login, googleAuth } = useContext(AuthContext);
@@ -61,6 +62,25 @@ export const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12 transition-colors duration-200 bg-gradient-to-br from-blue-50 to-white dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-900">
+      <Helmet>
+        <title>Login - Hotel Nest</title>
+        <meta
+          name="description"
+          content="Log in to your Hotel Nest account to access your bookings and manage your reservations."
+        />
+        <meta
+          name="keywords"
+          content="Login, Hotel Nest, User Account, Sign In, Hotel Reservations"
+        />
+        <meta name="author" content="Hotel Nest Team" />
+        <meta property="og:title" content="Login - Hotel Nest" />
+        <meta
+          property="og:description"
+          content="Welcome back! Sign in to your account to continue your journey with Hotel Nest."
+        />
+        <meta property="og:image" content="URL_to_image" />
+        <meta property="og:url" content="https://www.hotel-nest.com/login" />
+      </Helmet>
       <div className="max-w-md w-full space-y-8">
         {/* Header */}
         <div className="text-center">
