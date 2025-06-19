@@ -104,7 +104,7 @@ export const SpecialOffers = () => {
       )}
 
       {/* Special Offers Modal */}
-      {isModalOpen && (
+      {isModalOpen && discountedRooms.length > 0 && (
         <div className="modal modal-open z-50">
           <div className="modal-box max-w-6xl bg-white dark:bg-gray-800 relative">
             {/* Close Button */}

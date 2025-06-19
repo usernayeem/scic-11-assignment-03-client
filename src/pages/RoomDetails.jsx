@@ -133,6 +133,7 @@ export const RoomDetails = () => {
 
       const totalPrice = getTotalPrice();
       const bookingData = {
+        roomImage:  room.image,
         roomId: room._id,
         roomName: room.name,
         price: totalPrice,
