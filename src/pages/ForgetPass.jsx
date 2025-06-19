@@ -37,7 +37,6 @@ export const ForgetPass = () => {
       toast.success("Password reset email sent! Check your inbox.");
       setEmail("");
     } catch (error) {
-      console.error("Password reset error:", error);
       if (error.code === "auth/user-not-found") {
         toast.error("No account found with this email address.");
       } else if (error.code === "auth/invalid-email") {
