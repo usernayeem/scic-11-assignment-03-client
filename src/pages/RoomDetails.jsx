@@ -133,7 +133,7 @@ export const RoomDetails = () => {
 
       const totalPrice = getTotalPrice();
       const bookingData = {
-        roomImage:  room.image,
+        roomImage: room.image,
         roomId: room._id,
         roomName: room.name,
         price: totalPrice,
@@ -373,7 +373,7 @@ export const RoomDetails = () => {
             {/* Reviews Section */}
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
               <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-6">
-                Guest Reviews ({room.reviews?.length || 0})
+                Reviews ({room.reviews?.length || 0})
               </h3>
 
               {room.reviews && room.reviews.length > 0 ? (
@@ -419,7 +419,7 @@ export const RoomDetails = () => {
                     No reviews yet
                   </h4>
                   <p className="text-gray-600 dark:text-gray-400">
-                    Be the first to share your experience with this room!
+                    Book this room to share your experience!
                   </p>
                 </div>
               )}
