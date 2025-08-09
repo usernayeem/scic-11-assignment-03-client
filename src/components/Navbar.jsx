@@ -52,7 +52,7 @@ export const Navbar = () => {
   };
 
   return (
-    <div className="navbar shadow-md sticky top-0 z-50 transition-colors duration-200 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+    <div className="navbar shadow-md sticky top-0 z-50 transition-colors duration-200 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200 h-[12vh]">
       <div className="navbar-start">
         <Link
           to="/"
