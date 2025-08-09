@@ -650,7 +650,7 @@ export const RoomDetails = () => {
               <div className="modal-action">
                 <button
                   onClick={closeBookingModal}
-                  className="btn btn-ghost"
+                  className="btn btn-outline"
                   disabled={bookingLoading}
                 >
                   Cancel

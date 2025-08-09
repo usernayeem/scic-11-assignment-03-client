@@ -503,13 +503,13 @@ export const MyBookings = () => {
                                 {moment(booking.bookingDate).fromNow()}
                               </div>
                               {!canCancel && (
-                                <div className="text-xs text-red-500 dark:text-red-400 mt-1">
+                                <div className="text-xs text-blue-600 dark:text-blue-500 mt-1">
                                   <FaClock className="inline mr-1" />
                                   No longer cancellable
                                 </div>
                               )}
                               {canCancel && daysRemaining <= 2 && (
-                                <div className="text-xs text-orange-500 dark:text-orange-400 mt-1">
+                                <div className="text-xs text-blue-600 dark:text-blue-500 mt-1">
                                   <FaClock className="inline mr-1" />
                                   {daysRemaining} day
                                   {daysRemaining !== 1 ? "s" : ""} left to
@@ -518,7 +518,7 @@ export const MyBookings = () => {
                               )}
                             </td>
                             <td>
-                              <div className="font-bold text-blue-600">
+                              <div className="font-bold text-blue-600 dark:text-blue-500">
                                 ${Math.round(booking.price)}
                               </div>
                               <div className="text-xs text-gray-500 dark:text-gray-400">
@@ -551,7 +551,7 @@ export const MyBookings = () => {
                                         `/room-details/${booking.roomId}`
                                       )
                                     }
-                                    className="btn btn-ghost btn-xs text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900 p-2"
+                                    className="btn btn-ghost btn-xs text-blue-600 dark:text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900 p-2"
                                   >
                                     <FaEye className="text-xl" />
                                   </button>
@@ -559,7 +559,7 @@ export const MyBookings = () => {
                                 <div className="tooltip" data-tip="Update Date">
                                   <button
                                     onClick={() => openUpdateModal(booking)}
-                                    className="btn btn-ghost btn-xs text-green-600 hover:bg-green-50 dark:hover:bg-green-900 p-2"
+                                    className="btn btn-ghost btn-xs text-blue-600 dark:text-blue-500 hover p-2"
                                   >
                                     <FaEdit className="text-xl" />
                                   </button>
@@ -572,7 +572,7 @@ export const MyBookings = () => {
                                     onClick={() => openCancelModal(booking)}
                                     className={`btn btn-ghost btn-xs p-2 ${
                                       canCancel
-                                        ? "text-red-600 hover:bg-red-50 dark:hover:bg-red-900"
+                                        ? "text-blue-600 dark:text-blue-500 hover hover:bg-blue-50 dark:hover:bg-blue-900"
                                         : "text-gray-400 dark:text-gray-600"
                                     }`}
                                   >
@@ -625,7 +625,7 @@ export const MyBookings = () => {
                             ID: {booking._id.slice(-6)}
                           </p>
                           {!canCancel && (
-                            <div className="text-xs text-red-500 dark:text-red-400 mt-1">
+                            <div className="text-xs text-bkue-600 dark:text-blue-500 mt-1">
                               <FaClock className="inline mr-1" />
                               No longer cancellable
                             </div>
@@ -694,14 +694,14 @@ export const MyBookings = () => {
                           onClick={() =>
                             navigate(`/room-details/${booking.roomId}`)
                           }
-                          className="btn btn-sm btn-outline btn-primary flex-1"
+                          className="btn btn-sm btn-outline btn-primary flex-1 text-blue-600 dark:text-blue-500"
                         >
                           <FaEye className="mr-1 text-xl" />
                           View
                         </button>
                         <button
                           onClick={() => openUpdateModal(booking)}
-                          className="btn btn-sm btn-outline text-green-600 border-green-600 hover:bg-green-600 hover:text-white"
+                          className="btn btn-sm btn-outline text-blue-600 dark:text-blue-500 border-blue-600 hover:bg-blue-600 hover:text-white"
                         >
                           <FaEdit className="text-xl" />
                         </button>
@@ -710,7 +710,7 @@ export const MyBookings = () => {
                           className={`btn btn-sm btn-outline ${
                             canCancel
                               ? "btn-error"
-                              : "border-gray-400 text-gray-400 dark:border-gray-600 dark:text-gray-600"
+                              : "border-gray-400 text-blue-600 dark:text-blue-500 dark:border-blue-600"
                           }`}
                         >
                           <FaTrash className="text-xl" />
@@ -750,7 +750,7 @@ export const MyBookings = () => {
                 Cancel Booking
               </h3>
               <div className="mb-6">
-                <div className="alert alert-warning mb-4">
+                <div className="alert alert-warning mb-4 bg-blue-600 text-white border-0">
                   <FaExclamationTriangle />
                   <span>
                     Are you sure you want to cancel this booking? This action
@@ -774,7 +774,7 @@ export const MyBookings = () => {
                       Cancellation Deadline:{" "}
                       {getCancellationDeadline(selectedBooking.bookingDate)}
                     </p>
-                    <p className="text-green-600 dark:text-green-400">
+                    <p className="text-blue-600 dark:text-blue-200">
                       <FaCheck className="inline mr-1" />
                       You can cancel this booking
                     </p>
@@ -787,14 +787,14 @@ export const MyBookings = () => {
                     setCancelModalOpen(false);
                     setSelectedBooking(null);
                   }}
-                  className="btn btn-ghost"
+                  className="btn btn-outline"
                   disabled={cancelLoading}
                 >
                   Keep Booking
                 </button>
                 <button
                   onClick={handleCancelBooking}
-                  className="btn btn-error"
+                  className="btn btn-primary bg-blue-600"
                   disabled={cancelLoading}
                 >
                   {cancelLoading ? (
@@ -850,7 +850,7 @@ export const MyBookings = () => {
                     setSelectedBooking(null);
                     setNewDate("");
                   }}
-                  className="btn btn-ghost"
+                  className="btn btn-outline"
                   disabled={updateLoading}
                 >
                   Cancel
@@ -952,7 +952,7 @@ export const MyBookings = () => {
                     setIsEditingReview(false);
                     setExistingReview(null);
                   }}
-                  className="btn btn-ghost"
+                  className="btn btn-outline"
                   disabled={reviewLoading}
                 >
                   Cancel
