@@ -12,6 +12,7 @@ import { RoomDetails } from "../pages/RoomDetails";
 import { MyBookings } from "../pages/MyBookings";
 import { Contact } from "../pages/Contact";
 import { PrivateRoute } from "./PrivateRoute";
+import { About } from "../pages/About";
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
             <MyBookings />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/about",
+        element: <About />,
       },
       {
         path: "*",

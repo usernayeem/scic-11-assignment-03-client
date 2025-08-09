@@ -4,12 +4,12 @@ import { Link, NavLink } from "react-router-dom";
 import { useToast } from "../contexts/ToastContext";
 import { LuHotel } from "react-icons/lu";
 import { CiMenuFries } from "react-icons/ci";
-import {
-  FaHome,
-  FaBed,
-  FaCalendarAlt,
-  FaPhone,
-  FaInfoCircle,
+import { 
+  FaHome, 
+  FaBed, 
+  FaCalendarAlt, 
+  FaPhone, 
+  FaInfoCircle
 } from "react-icons/fa";
 
 export const Navbar = () => {
@@ -114,19 +114,22 @@ export const Navbar = () => {
             </li>
           )}
 
-          <li>
-            <NavLink
-              to="/about"
-              className={({ isActive }) =>
-                isActive
-                  ? "bg-blue-100 text-blue-600 rounded-lg dark:bg-blue-900 dark:text-white flex items-center gap-2"
-                  : "hover:bg-blue-50 hover:text-blue-600 rounded-lg dark:hover:bg-blue-900 dark:hover:text-white flex items-center gap-2"
-              }
-            >
-              <FaInfoCircle className="text-sm" />
-              About
-            </NavLink>
-          </li>
+          {/* About - Only for logged in users */}
+          {user && (
+            <li>
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-blue-100 text-blue-600 rounded-lg dark:bg-blue-900 dark:text-white flex items-center gap-2"
+                    : "hover:bg-blue-50 hover:text-blue-600 rounded-lg dark:hover:bg-blue-900 dark:hover:text-white flex items-center gap-2"
+                }
+              >
+                <FaInfoCircle className="text-sm" />
+                About
+              </NavLink>
+            </li>
+          )}
 
           {/* Contact - Always visible */}
           <li>
@@ -234,7 +237,7 @@ export const Navbar = () => {
                 Rooms
               </NavLink>
             </li>
-
+            
             {/* My Bookings - Only for logged in users */}
             {user && (
               <li>
@@ -245,12 +248,15 @@ export const Navbar = () => {
               </li>
             )}
 
-            <li>
-              <NavLink to="/about" className="flex items-center gap-2">
-                <FaInfoCircle className="text-sm" />
-                About
-              </NavLink>
-            </li>
+            {/* About - Only for logged in users */}
+            {user && (
+              <li>
+                <NavLink to="/about" className="flex items-center gap-2">
+                  <FaInfoCircle className="text-sm" />
+                  About
+                </NavLink>
+              </li>
+            )}
 
             <li>
               <NavLink to="/contact" className="flex items-center gap-2">
