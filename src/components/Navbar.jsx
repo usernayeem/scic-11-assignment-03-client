@@ -4,6 +4,13 @@ import { Link, NavLink } from "react-router-dom";
 import { useToast } from "../contexts/ToastContext";
 import { LuHotel } from "react-icons/lu";
 import { CiMenuFries } from "react-icons/ci";
+import {
+  FaHome,
+  FaBed,
+  FaCalendarAlt,
+  FaPhone,
+  FaInfoCircle,
+} from "react-icons/fa";
 
 export const Navbar = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -37,7 +44,7 @@ export const Navbar = () => {
     Logout()
       .then(() => {
         setIsProfileOpen(false);
-        toast.info("Logout successful!.");
+        toast.info("Logout successful!");
       })
       .catch((error) => {
         toast.error("An error happened.");
@@ -60,39 +67,78 @@ export const Navbar = () => {
       {/* Desktop Navigation Links */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 flex gap-2">
+          {/* Home - Always visible */}
+          <li>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive
+                  ? "bg-blue-100 text-blue-600 rounded-lg dark:bg-blue-900 dark:text-white flex items-center gap-2"
+                  : "hover:bg-blue-50 hover:text-blue-600 rounded-lg dark:hover:bg-blue-900 dark:hover:text-white flex items-center gap-2"
+              }
+            >
+              <FaHome className="text-sm" />
+              Home
+            </NavLink>
+          </li>
+
+          {/* Rooms - Always visible */}
           <li>
             <NavLink
               to="/rooms"
               className={({ isActive }) =>
                 isActive
-                  ? "bg-blue-100 text-blue-600 rounded-lg dark:bg-blue-900 dark:text-white"
-                  : "hover:bg-blue-50 hover:text-blue-600 rounded-lg dark:hover:bg-blue-900 dark:hover:text-white"
+                  ? "bg-blue-100 text-blue-600 rounded-lg dark:bg-blue-900 dark:text-white flex items-center gap-2"
+                  : "hover:bg-blue-50 hover:text-blue-600 rounded-lg dark:hover:bg-blue-900 dark:hover:text-white flex items-center gap-2"
               }
             >
+              <FaBed className="text-sm" />
               Rooms
             </NavLink>
           </li>
+
+          {/* My Bookings - Only for logged in users */}
+          {user && (
+            <li>
+              <NavLink
+                to="/my-bookings"
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-blue-100 text-blue-600 rounded-lg dark:bg-blue-900 dark:text-white flex items-center gap-2"
+                    : "hover:bg-blue-50 hover:text-blue-600 rounded-lg dark:hover:bg-blue-900 dark:hover:text-white flex items-center gap-2"
+                }
+              >
+                <FaCalendarAlt className="text-sm" />
+                My Bookings
+              </NavLink>
+            </li>
+          )}
+
           <li>
             <NavLink
-              to="/my-bookings"
+              to="/about"
               className={({ isActive }) =>
                 isActive
-                  ? "bg-blue-100 text-blue-600 rounded-lg dark:bg-blue-900 dark:text-white"
-                  : "hover:bg-blue-50 hover:text-blue-600 rounded-lg dark:hover:bg-blue-900 dark:hover:white"
+                  ? "bg-blue-100 text-blue-600 rounded-lg dark:bg-blue-900 dark:text-white flex items-center gap-2"
+                  : "hover:bg-blue-50 hover:text-blue-600 rounded-lg dark:hover:bg-blue-900 dark:hover:text-white flex items-center gap-2"
               }
             >
-              My Bookings
+              <FaInfoCircle className="text-sm" />
+              About
             </NavLink>
           </li>
+
+          {/* Contact - Always visible */}
           <li>
             <NavLink
               to="/contact"
               className={({ isActive }) =>
                 isActive
-                  ? "bg-blue-100 text-blue-600 rounded-lg dark:bg-blue-900 dark:text-white"
-                  : "hover:bg-blue-50 hover:text-blue-600 rounded-lg dark:hover:bg-blue-900 dark:hover:white"
+                  ? "bg-blue-100 text-blue-600 rounded-lg dark:bg-blue-900 dark:text-white flex items-center gap-2"
+                  : "hover:bg-blue-50 hover:text-blue-600 rounded-lg dark:hover:bg-blue-900 dark:hover:text-white flex items-center gap-2"
               }
             >
+              <FaPhone className="text-sm" />
               Contact
             </NavLink>
           </li>
@@ -177,13 +223,40 @@ export const Navbar = () => {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52 transition-colors duration-200 bg-base-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
           >
             <li>
-              <NavLink to="/rooms">Rooms</NavLink>
+              <NavLink to="/" className="flex items-center gap-2">
+                <FaHome className="text-sm" />
+                Home
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/my-bookings">My Bookings</NavLink>
+              <NavLink to="/rooms" className="flex items-center gap-2">
+                <FaBed className="text-sm" />
+                Rooms
+              </NavLink>
             </li>
+
+            {/* My Bookings - Only for logged in users */}
+            {user && (
+              <li>
+                <NavLink to="/my-bookings" className="flex items-center gap-2">
+                  <FaCalendarAlt className="text-sm" />
+                  My Bookings
+                </NavLink>
+              </li>
+            )}
+
             <li>
-              <NavLink to="/contact">Contact</NavLink>
+              <NavLink to="/about" className="flex items-center gap-2">
+                <FaInfoCircle className="text-sm" />
+                About
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink to="/contact" className="flex items-center gap-2">
+                <FaPhone className="text-sm" />
+                Contact
+              </NavLink>
             </li>
 
             {/* Conditional mobile menu items */}
