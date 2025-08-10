@@ -108,7 +108,7 @@ export const HotelAmenities = () => {
   ];
 
   return (
-    <div className="w-full py-16 transition-colors duration-200 bg-gray-50 dark:bg-gray-900">
+    <div className="w-full py-16 transition-colors duration-200 bg-gray-50 dark:bg-gray-800">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12">
@@ -130,7 +130,7 @@ export const HotelAmenities = () => {
             {allAmenities.map((amenity, index) => (
               <div
                 key={index}
-                className="flex items-start gap-4 p-4 rounded-lg transition-all duration-200 bg-white hover:bg-blue-50 border border-gray-200 hover:border-blue-200 dark:bg-gray-800 dark:hover:bg-blue-900/10 dark:border-gray-700 dark:hover:border-blue-700"
+                className="flex items-start gap-4 p-4 rounded-lg transition-all duration-200 bg-white hover:bg-blue-50 border border-gray-200 hover:border-blue-200 dark:bg-gray-800 dark:hover:bg-blue-900/10 dark:border-gray-700 dark:hover:border-blue-700 shadow-lg"
               >
                 <div className="flex-shrink-0 p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30">
                   <amenity.icon className="text-blue-600 text-xl" />

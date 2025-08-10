@@ -52,7 +52,7 @@ export const Map = () => {
   };
 
   return (
-    <div className="w-full py-16 transition-colors duration-200 bg-gray-50 dark:bg-gray-900">
+    <div className="w-full py-16 transition-colors duration-200 bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12">

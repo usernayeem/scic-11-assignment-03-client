@@ -56,7 +56,7 @@ const NextArrow = (props) => {
 export const Banner = () => {
   // Slider settings
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 800,
     fade: true,
