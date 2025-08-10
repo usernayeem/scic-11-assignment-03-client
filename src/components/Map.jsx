@@ -56,8 +56,8 @@ export const Map = () => {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-gray-200">
-            Find Us Here
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800 dark:text-white">
+            Find Us <span className="text-blue-600">Here</span>
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Located in the heart of the city, our hotel offers easy access to
@@ -128,7 +128,7 @@ export const Map = () => {
             <div className="rounded-lg shadow-lg p-6 h-full transition-colors duration-200 bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900">
-                  <LuHotel className="text-blue-600 text-xl" />
+                  <LuHotel className="text-blue-600 dark:text-white text-xl" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-gray-200">
                   {hotelLocation.name}
@@ -196,7 +196,7 @@ export const Map = () => {
 
               {/* Additional Info */}
               <div className="mt-4 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20">
-                <p className="text-xs text-blue-600 dark:text-blue-400">
+                <p className="text-xs text-blue-600 dark:text-blue-200">
                   <strong>Transportation:</strong> 2 minutes walk to subway
                   station, 15 minutes to airport
                 </p>
