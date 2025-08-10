@@ -215,6 +215,7 @@ export const MyBookings = () => {
         comment: reviewComment,
         date: new Date().toLocaleDateString(),
         userEmail: user.email,
+        photoURL: user.photoURL || null,
       };
 
       if (isEditingReview) {

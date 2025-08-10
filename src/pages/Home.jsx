@@ -5,6 +5,7 @@ import { HotelAmenities } from "../components/HotelAmenities";
 import { Contact } from "../components/Contact";
 import { SpecialOffers } from "../components/SpecialOffers";
 import { Helmet } from "react-helmet";
+import { Review } from "../components/Review";
 
 export const Home = () => {
   return (
@@ -32,6 +33,7 @@ export const Home = () => {
       <Banner />
       <Map />
       <HotelAmenities />
+      <Review />
       <Contact />
     </div>
   );
