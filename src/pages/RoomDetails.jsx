@@ -14,7 +14,6 @@ import {
   FaRulerCombined,
   FaCalendarAlt,
   FaArrowLeft,
-  FaUser,
   FaQuoteLeft,
   FaCheck,
   FaExclamationTriangle,
@@ -385,9 +384,18 @@ export const RoomDetails = () => {
                     >
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex items-center">
-                          <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
-                            <FaUser className="text-blue-600 dark:text-blue-400" />
-                          </div>
+                          <img
+                            src={
+                              review.photoURL ||
+                              "https://i.ibb.co/MDfpbH6T/profile.webp"
+                            }
+                            alt={review.name || "Guest"}
+                            className="w-10 h-10 rounded-full object-cover border-2 border-blue-200 dark:border-blue-400"
+                            onError={(e) => {
+                              e.target.src =
+                                "https://i.ibb.co/MDfpbH6T/profile.webp";
+                            }}
+                          />
                           <div className="ml-3">
                             <h4 className="font-semibold text-gray-800 dark:text-white">
                               {review.name || "Anonymous Guest"}
